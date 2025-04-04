@@ -1,24 +1,17 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/',
   plugins: [react()],
+  base: '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    minify: 'esbuild',
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
       output: {
-        assetFileNames: 'assets/[name].[hash].[ext]',
-        chunkFileNames: 'assets/[name].[hash].js',
-        entryFileNames: 'assets/[name].[hash].js',
+        manualChunks: undefined
       }
-    },
-    minify: 'esbuild',  // 使用 esbuild 而不是 terser
-    sourcemap: false
+    }
   }
-});
+})
